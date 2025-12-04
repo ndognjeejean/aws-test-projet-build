@@ -1,0 +1,30 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.10
+    commands:
+      - echo "Installation des dépendances"
+      - pip install --upgrade pip
+      - pip install -r requirements.txt
+
+  pre_build:
+    commands:
+      - echo "Exécution des tests unitaires"
+      - pytest --junitxml=reports/results.xml --tb=short
+
+  build:
+    commands:
+      - echo "Build terminé — rien à compiler pour un projet Python simple"
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: .
+
+reports:
+  pytest_reports:
+    files:
+      - "reports/results.xml"
+    discard-paths: yes
